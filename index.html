@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Image</title>
+	    <style>
+        html,
+        body {
+          height: 100%;
+          width: 100%;
+          margin: 0;
+        }
+        .canvas {
+          background-color: #c9c9c9;
+          height: 100%;
+          width: 100%;
+        }
+    </style>
+</head>
+<body>
+	<canvas id="canvas" class="canvas" resize="true" height="100%" width="100%"></canvas>
+
+<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="paper-full.min.js"></script>
+<script type="text/paperscript" canvas="canvas" resize="true" src="imageEffects.pjs"></script>
+</body>
+</html>

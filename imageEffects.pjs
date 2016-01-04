@@ -1,0 +1,77 @@
+// Please note: dragging and dropping images only works for
+// certain browsers when serving this script online:
+var path, position, max;
+var count = 0;
+var start = false;
+var image = "cool-bg.jpg",
+	gridSize = 10, 
+	spacing = 1,
+	iterations = 0,
+	mousePoint = null,
+	winHeight = window.innerHeight,
+	winWidth  = window.innerWidth;
+
+var raster = new Raster({
+	source: image
+});
+
+
+/**
+ * Helper function that returns a random number between the two supplied
+ * numbers. 
+ */
+function rando(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+raster.onLoad = function() {
+	raster.bounds.topLeft = 0;
+	addBlocks();
+};
+
+function onMouseDown(event) {
+	raster.remove();
+	mousePoint = event.point;
+	start = true;
+}
+
+function onFrame() {
+	rumbleEffect();
+}
+
+
+function addBlocks() {
+	for (var j=0; j<raster.height; j+=200) {
+		for(var i=0; i<raster.width; i+=200) {
+			var shape = new Rectangle({
+				point: [i, j],
+				size:  [200, 200]
+			});
+			var data = raster.getSubRaster(shape);
+		}
+	}
+}
+
+function rumbleEffect() {
+	if (start) {
+		if (iterations < 80) {
+			var numPieces = project.activeLayer.children.length;
+			for (var i=0; i<numPieces; i++) {
+					project.activeLayer.children[i].position.x += rando(-15,15);
+					project.activeLayer.children[i].position.y += rando(-15,15);
+			}
+			iterations++;
+		}else if (iterations < 200) {
+			var numPieces = project.activeLayer.children.length;
+			for (var i=0; i<numPieces; i++) {
+				    project.activeLayer.children[i].position.x += rando(-5,5);
+					project.activeLayer.children[i].position.y += rando(5,15);
+			}
+			iterations++;
+		}
+	}
+}
+
+
+
+
